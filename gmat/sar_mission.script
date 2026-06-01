@@ -1,0 +1,259 @@
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2026-05-22 14:02:25
+
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+
+Create Spacecraft DefaultSC;
+DefaultSC.DateFormat = UTCGregorian;
+DefaultSC.Epoch = '01 Jan 2026 12:00:00.000';
+DefaultSC.CoordinateSystem = EarthMJ2000Eq;
+DefaultSC.DisplayStateType = Keplerian;
+DefaultSC.SMA = 6978;
+DefaultSC.ECC = 9.517775135051747e-19;
+DefaultSC.INC = 97.79000000000001;
+DefaultSC.RAAN = 0;
+DefaultSC.AOP = 0;
+DefaultSC.TA = 0;
+DefaultSC.DryMass = 850;
+DefaultSC.Cd = 2.2;
+DefaultSC.Cr = 1.8;
+DefaultSC.DragArea = 15;
+DefaultSC.SRPArea = 1;
+DefaultSC.SPADDragScaleFactor = 1;
+DefaultSC.SPADSRPScaleFactor = 1;
+DefaultSC.AtmosDensityScaleFactor = 1;
+DefaultSC.ExtendedMassPropertiesModel = 'None';
+DefaultSC.NAIFId = -10002001;
+DefaultSC.NAIFIdReferenceFrame = -9002001;
+DefaultSC.OrbitColor = Red;
+DefaultSC.TargetColor = Teal;
+DefaultSC.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+DefaultSC.CdSigma = 1e+70;
+DefaultSC.CrSigma = 1e+70;
+DefaultSC.Id = 'SatId';
+DefaultSC.Attitude = CoordinateSystemFixed;
+DefaultSC.SPADSRPInterpolationMethod = Bilinear;
+DefaultSC.SPADSRPScaleFactorSigma = 1e+70;
+DefaultSC.SPADDragInterpolationMethod = Bilinear;
+DefaultSC.SPADDragScaleFactorSigma = 1e+70;
+DefaultSC.AtmosDensityScaleFactorSigma = 1e+70;
+DefaultSC.ModelFile = 'aura.3ds';
+DefaultSC.ModelOffsetX = 0;
+DefaultSC.ModelOffsetY = 0;
+DefaultSC.ModelOffsetZ = 0;
+DefaultSC.ModelRotationX = 0;
+DefaultSC.ModelRotationY = 0;
+DefaultSC.ModelRotationZ = 0;
+DefaultSC.ModelScale = 1;
+DefaultSC.AttitudeDisplayStateType = 'Quaternion';
+DefaultSC.AttitudeRateDisplayStateType = 'AngularVelocity';
+DefaultSC.AttitudeCoordinateSystem = EarthMJ2000Eq;
+DefaultSC.EulerAngleSequence = '321';
+
+%----------------------------------------
+%---------- GroundStations
+%----------------------------------------
+
+Create GroundStation Inuvik;
+Inuvik.OrbitColor = Thistle;
+Inuvik.TargetColor = DarkGray;
+Inuvik.CentralBody = Earth;
+Inuvik.StateType = Spherical;
+Inuvik.HorizonReference = Sphere;
+Inuvik.Location1 = 68.31950000000001;
+Inuvik.Location2 = 226.4505;
+Inuvik.Location3 = 0.102;
+Inuvik.Id = 'StationId';
+Inuvik.IonosphereModel = 'None';
+Inuvik.TroposphereModel = 'None';
+Inuvik.DataSource = 'Constant';
+Inuvik.Temperature = 295.1;
+Inuvik.Pressure = 1013.5;
+Inuvik.Humidity = 55;
+Inuvik.MinimumElevationAngle = 5;
+
+Create GroundStation Prince_Albert;
+Prince_Albert.OrbitColor = [64 61 224];
+Prince_Albert.TargetColor = DarkGray;
+Prince_Albert.CentralBody = Earth;
+Prince_Albert.StateType = Spherical;
+Prince_Albert.HorizonReference = Sphere;
+Prince_Albert.Location1 = 53.2124;
+Prince_Albert.Location2 = 254.0686;
+Prince_Albert.Location3 = 0.49;
+Prince_Albert.Id = 'StationId';
+Prince_Albert.IonosphereModel = 'None';
+Prince_Albert.TroposphereModel = 'None';
+Prince_Albert.DataSource = 'Constant';
+Prince_Albert.Temperature = 295.1;
+Prince_Albert.Pressure = 1013.5;
+Prince_Albert.Humidity = 55;
+Prince_Albert.MinimumElevationAngle = 5;
+
+Create GroundStation Gatineau;
+Gatineau.OrbitColor = [82 223 73];
+Gatineau.TargetColor = DarkGray;
+Gatineau.CentralBody = Earth;
+Gatineau.StateType = Spherical;
+Gatineau.HorizonReference = Sphere;
+Gatineau.Location1 = 45.5853;
+Gatineau.Location2 = 284.2127;
+Gatineau.Location3 = 0.24;
+Gatineau.Id = 'StationId';
+Gatineau.IonosphereModel = 'None';
+Gatineau.TroposphereModel = 'None';
+Gatineau.DataSource = 'Constant';
+Gatineau.Temperature = 295.1;
+Gatineau.Pressure = 1013.5;
+Gatineau.Humidity = 55;
+Gatineau.MinimumElevationAngle = 5;
+
+
+
+
+%----------------------------------------
+%---------- ForceModels
+%----------------------------------------
+
+Create ForceModel DefaultProp_ForceModel;
+DefaultProp_ForceModel.CentralBody = Earth;
+DefaultProp_ForceModel.PrimaryBodies = {Earth};
+DefaultProp_ForceModel.Drag = None;
+DefaultProp_ForceModel.SRP = Off;
+DefaultProp_ForceModel.RelativisticCorrection = Off;
+DefaultProp_ForceModel.ErrorControl = RSSStep;
+DefaultProp_ForceModel.GravityField.Earth.Degree = 4;
+DefaultProp_ForceModel.GravityField.Earth.Order = 4;
+DefaultProp_ForceModel.GravityField.Earth.StmLimit = 100;
+DefaultProp_ForceModel.GravityField.Earth.PotentialFile = 'JGM2.cof';
+DefaultProp_ForceModel.GravityField.Earth.TideModel = 'None';
+
+%----------------------------------------
+%---------- Propagators
+%----------------------------------------
+
+Create Propagator DefaultProp;
+DefaultProp.FM = DefaultProp_ForceModel;
+DefaultProp.Type = RungeKutta89;
+DefaultProp.InitialStepSize = 60;
+DefaultProp.Accuracy = 9.999999999999999e-12;
+DefaultProp.MinStep = 0.001;
+DefaultProp.MaxStep = 2700;
+DefaultProp.MaxStepAttempts = 50;
+DefaultProp.StopIfAccuracyIsViolated = true;
+
+%----------------------------------------
+%---------- EventLocators
+%----------------------------------------
+
+Create ContactLocator ContactLocator1;
+ContactLocator1.Target = DefaultSC;
+ContactLocator1.Filename = '/Users/melodie/Desktop/MDA_Capstone/ContactReport.txt';
+ContactLocator1.InputEpochFormat = 'TAIModJulian';
+ContactLocator1.InitialEpoch = '21545';
+ContactLocator1.StepSize = 10;
+ContactLocator1.FinalEpoch = '21545.138';
+ContactLocator1.UseLightTimeDelay = true;
+ContactLocator1.UseStellarAberration = true;
+ContactLocator1.WriteReport = true;
+ContactLocator1.RunMode = Automatic;
+ContactLocator1.UseEntireInterval = true;
+ContactLocator1.Observers = {Gatineau, Inuvik, Prince_Albert};
+ContactLocator1.LightTimeDirection = Transmit;
+ContactLocator1.LeftJustified = false;
+ContactLocator1.ReportPrecision = 6;
+ContactLocator1.ReportFormat = 'Legacy';
+ContactLocator1.IntervalStepSize = 0;
+ContactLocator1.ReportTimeFormat = 'UTCGregorian';
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create OpenFramesInterface DefaultOrbitView;
+DefaultOrbitView.SolverIterations = Current;
+DefaultOrbitView.UpperLeft = [ 0.5462962962962963 0.07535641547861507 ];
+DefaultOrbitView.Size = [ 0.3584656084656085 0.3014256619144603 ];
+DefaultOrbitView.RelativeZOrder = 73;
+DefaultOrbitView.Maximized = false;
+DefaultOrbitView.Add = {DefaultSC, Earth};
+DefaultOrbitView.View = {DefaultOrbitView_View};
+DefaultOrbitView.CoordinateSystem = EarthMJ2000Eq;
+DefaultOrbitView.DrawObject = [ true true ];
+DefaultOrbitView.DrawTrajectory = [ true true ];
+DefaultOrbitView.DrawAxes = [ false false ];
+DefaultOrbitView.DrawXYPlane = [ false false ];
+DefaultOrbitView.DrawLabel = [ true true ];
+DefaultOrbitView.DrawUsePropLabel = [ false false ];
+DefaultOrbitView.DrawCenterPoint = [ true true ];
+DefaultOrbitView.DrawEndPoints = [ true true ];
+DefaultOrbitView.DrawVelocity = [ false false ];
+DefaultOrbitView.DrawGrid = [ false false ];
+DefaultOrbitView.DrawLineWidth = [ 2 2 ];
+DefaultOrbitView.DrawMarkerSize = [ 10 10 ];
+DefaultOrbitView.DrawFontSize = [ 20 20 ];
+DefaultOrbitView.Axes = On;
+DefaultOrbitView.AxesLength = 12756.2726;
+DefaultOrbitView.AxesLabels = On;
+DefaultOrbitView.FrameLabel = Off;
+DefaultOrbitView.XYPlane = On;
+DefaultOrbitView.EclipticPlane = Off;
+DefaultOrbitView.EnableStars = On;
+DefaultOrbitView.StarCatalog = 'inp_StarsHYGv3.txt';
+DefaultOrbitView.StarCount = 40000;
+DefaultOrbitView.MinStarMag = -2;
+DefaultOrbitView.MaxStarMag = 6;
+DefaultOrbitView.MinStarPixels = 1;
+DefaultOrbitView.MaxStarPixels = 10;
+DefaultOrbitView.MinStarDimRatio = 0.5;
+DefaultOrbitView.ShowPlot = true;
+DefaultOrbitView.ShowToolbar = true;
+DefaultOrbitView.SolverIterLastN = 1;
+DefaultOrbitView.ShowVR = false;
+DefaultOrbitView.PlaybackTimeScale = 3600;
+DefaultOrbitView.MultisampleAntiAliasing = On;
+DefaultOrbitView.MSAASamples = 2;
+DefaultOrbitView.DrawFontPosition = {'Top-Right', 'Top-Right'};
+
+Create GroundTrack DefaultGroundTrackPlot;
+DefaultGroundTrackPlot.SolverIterations = Current;
+DefaultGroundTrackPlot.UpperLeft = [ 0.2751322751322751 0.3421588594704684 ];
+DefaultGroundTrackPlot.Size = [ 0.576058201058201 0.4989816700610998 ];
+DefaultGroundTrackPlot.RelativeZOrder = 69;
+DefaultGroundTrackPlot.Maximized = false;
+DefaultGroundTrackPlot.CentralBody = Earth;
+DefaultGroundTrackPlot.Add = {DefaultSC, Gatineau, Inuvik, Prince_Albert};
+DefaultGroundTrackPlot.DataCollectFrequency = 1;
+DefaultGroundTrackPlot.UpdatePlotFrequency = 50;
+DefaultGroundTrackPlot.NumPointsToRedraw = 0;
+DefaultGroundTrackPlot.MaxPlotPoints = 20000;
+DefaultGroundTrackPlot.ShowPlot = true;
+
+%----------------------------------------
+%---------- User Objects
+%----------------------------------------
+
+Create OpenFramesView DefaultOrbitView_View;
+DefaultOrbitView_View.ViewFrame = CoordinateSystem;
+DefaultOrbitView_View.ViewTrajectory = Off;
+DefaultOrbitView_View.InertialFrame = Off;
+DefaultOrbitView_View.SetDefaultLocation = On;
+DefaultOrbitView_View.DefaultEye = [ 30000 0 0 ];
+DefaultOrbitView_View.DefaultCenter = [ 0 0 0 ];
+DefaultOrbitView_View.DefaultUp = [ 0 0 1 ];
+DefaultOrbitView_View.SetCurrentLocation = On;
+DefaultOrbitView_View.CurrentEye = [ -21202.68059597037 -6897.596631199628 20071.60920949105 ];
+DefaultOrbitView_View.CurrentCenter = [ 0 0 7.275957614183426e-12 ];
+DefaultOrbitView_View.CurrentUp = [ 0.6395335307012615 0.1967076797561291 0.7431708766049292 ];
+DefaultOrbitView_View.FOVy = 45;
+
+
+%----------------------------------------
+%---------- Mission Sequence
+%----------------------------------------
+
+BeginMissionSequence;
+Propagate DefaultProp(DefaultSC) {DefaultSC.ElapsedDays = 7};
