@@ -128,7 +128,7 @@ plt.show()
 fig, ax = plt.subplots(figsize = (13, 6))
 
 stations = ["Gatineau", "Inuvik", "Prince_Albert"]
-station_colors = {
+station_colours = {
     "Gatineau": "#1f77b4",      
     "Inuvik": "#ff7f0e",        
     "Prince_Albert": "#2ca02c", 
@@ -137,7 +137,7 @@ station_colors = {
 for c in contacts: # Loop through each contact and create a horizontal bar for the contact duration
     y = stations.index(c["station"])
     width = c["stop"] - c["start"]
-    ax.barh(y, width, left=c["start"], height=0.6, color=station_colors[c["station"]])
+    ax.barh(y, width, left=c["start"], height=0.6, color=station_colours[c["station"]])
 
 ax.set_yticks([0, 1, 2])
 ax.set_yticklabels(["Gatineau", "Inuvik", "Prince Albert"])
@@ -145,9 +145,9 @@ ax.set_xlabel("Date (UTC)")
 ax.set_title("Contact Timeline - 7-day Mission Simulation")
 
 legend_patches = [
-    Patch(color=station_colors["Gatineau"], label="Gatineau"),
-    Patch(color=station_colors["Inuvik"], label="Inuvik"),
-    Patch(color=station_colors["Prince_Albert"], label="Prince Albert"),
+    Patch(color=station_colours["Gatineau"], label="Gatineau"),
+    Patch(color=station_colours["Inuvik"], label="Inuvik"),
+    Patch(color=station_colours["Prince_Albert"], label="Prince Albert"),
 ]
 ax.legend(handles=legend_patches, loc="upper right")
 
