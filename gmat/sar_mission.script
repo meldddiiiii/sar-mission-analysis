@@ -141,7 +141,7 @@ DefaultProp.Type = RungeKutta89;
 DefaultProp.InitialStepSize = 60;
 DefaultProp.Accuracy = 9.999999999999999e-12;
 DefaultProp.MinStep = 0.001;
-DefaultProp.MaxStep = 2700;
+DefaultProp.MaxStep = 10;
 DefaultProp.MaxStepAttempts = 50;
 DefaultProp.StopIfAccuracyIsViolated = true;
 
@@ -151,7 +151,7 @@ DefaultProp.StopIfAccuracyIsViolated = true;
 
 Create ContactLocator ContactLocator1;
 ContactLocator1.Target = DefaultSC;
-ContactLocator1.Filename = '/Users/melodie/Desktop/MDA_Capstone/ContactReport.txt';
+ContactLocator1.Filename = '/Users/melodie/Desktop/SAR_Mission_Analysis/ContactReport.txt';
 ContactLocator1.InputEpochFormat = 'TAIModJulian';
 ContactLocator1.InitialEpoch = '21545';
 ContactLocator1.StepSize = 10;
@@ -231,6 +231,11 @@ DefaultGroundTrackPlot.UpdatePlotFrequency = 50;
 DefaultGroundTrackPlot.NumPointsToRedraw = 0;
 DefaultGroundTrackPlot.MaxPlotPoints = 20000;
 DefaultGroundTrackPlot.ShowPlot = true;
+
+Create ReportFile PositionReport;
+PositionReport.Filename = '/Users/melodie/Desktop/SAR_Mission_Analysis/PositionReport.txt';
+PositionReport.Add = {DefaultSC.ElapsedSecs, DefaultSC.EarthMJ2000Eq.X, DefaultSC.EarthMJ2000Eq.Y, DefaultSC.EarthMJ2000Eq.Z};
+PositionReport.WriteHeaders = true;
 
 %----------------------------------------
 %---------- User Objects

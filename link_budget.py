@@ -230,6 +230,17 @@ plt.title('Data Volume Per Pass Over Time')
 plt.xlabel('Time (hrs)')
 plt.ylabel('Data Volume (Gb)')
 
-plt.tight_layout()
+#plot summary text
+plt.tight_layout(rect=[0, 0.15, 1, 1])
+
+plt.figtext(0.17, 0.02, "Inuvik dominates due to its polar proximity,\nyielding the most passes and highest data volume.", 
+            ha='center', fontsize=8, wrap=True)
+
+plt.figtext(0.5, 0.02, "Longer passes yield proportionally more usable time.\nShort passes (<250s) fail to close the link.", 
+            ha='center', fontsize=8, wrap=True)
+
+plt.figtext(0.83, 0.02, "Data volume is consistent across all 7 days.\nZero-data points represent marginal horizon passes.", 
+            ha='center', fontsize=8, wrap=True)
+
 plt.savefig('/Users/melodie/Desktop/SAR_Mission_Analysis/link_budget_results.png', dpi=150)
 plt.show()
